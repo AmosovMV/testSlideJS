@@ -9,64 +9,88 @@ let imageArray = [
   },
   {
     url: './image/image_3.png',
-    title: "Рис2"
+    title: "Рис3"
   },
 ];
 
 
 function initImageSlider() {
-  let slider_img = document.querySelector(".project-image-select");
-  let point_select_left = document.querySelector('.select-left');
-  let point_select_right = document.querySelector('.select-right');
-  let line_select_left = document.querySelector('.line-select-left');
-  let line_select_right = document.querySelector('.line-select-right');
+  let sliderImg = document.querySelector(".project-image-select");
+  let selectLeft = document.querySelector('.select-left');
+  let selectRight = document.querySelector('.select-right');
+  let lineSelectLeft = document.querySelector('.line-select-left');
+  let lineSelectRight = document.querySelector('.line-select-right');
   let dotsSelect = document.querySelector('.dot-select');
   let linkSelect = document.getElementsByClassName('select-items_link');
+  let pointSelectLeft = document.querySelector('.point-select-left');
+  let pointSelectRight = document.querySelector('.point-select-right');
 
+  //////////////изображения
 
   function initImage() {
     imageArray.forEach(function (item, index) {
       let imgDiv = `<div class="img${index} image ${index === 0 ? "currentImg" : ""}" style=background-image:url(${imageArray[index].url}) data-index=${index}></div>`;
-      slider_img.innerHTML += imgDiv;
+      sliderImg.innerHTML += imgDiv;
     })
   };
 
   initImage();
 
   function initSelect() {
-    let currentIndex = +slider_img.querySelector(".currentImg").dataset.index;
+    let currentIndex = +sliderImg.querySelector(".currentImg").dataset.index;
     let nextIndex = 0;
-    point_select_right.addEventListener('click', function () {
+    
+    /////////обработка события клика на стрелках
+
+    selectRight.addEventListener('click', function () {
       nextIndex === imageArray.length - 1 ? nextIndex = 0 : nextIndex += 1;
       moveCurrentImg(nextIndex);
     })
-    point_select_left.addEventListener('click', function () {
+    selectLeft.addEventListener('click', function () {
       nextIndex === 0 ? nextIndex = imageArray.length - 1 : nextIndex -= 1;
       moveCurrentImg(nextIndex);
     })
-    ///////////////////////////////////////
-    line_select_right.addEventListener('click', function () {
+
+    ////////обработка события клика на линиях 
+
+    lineSelectRight.addEventListener('click', function () {
       nextIndex === imageArray.length - 1 ? nextIndex = 0 : nextIndex += 1;
       moveCurrentImg(nextIndex);
     });
 
-    line_select_left.addEventListener('click', function () {
+    lineSelectLeft.addEventListener('click', function () {
       nextIndex === 0 ? nextIndex = imageArray.length - 1 : nextIndex -= 1;
       moveCurrentImg(nextIndex);
-    })
+    });
+
+    //////////обработка события клика на точках
+
+    pointSelectRight.addEventListener('click', function () {
+      nextIndex === imageArray.length - 1 ? nextIndex = 0 : nextIndex += 1;
+      moveCurrentImg(nextIndex);
+    });
+
+    pointSelectLeft.addEventListener('click', function () {
+      nextIndex === 0 ? nextIndex = imageArray.length - 1 : nextIndex -= 1;
+      moveCurrentImg(nextIndex)
+    });
   }
 
   initSelect();
 
   function moveCurrentImg(numb) {
-    slider_img.querySelector('.currentImg').classList.remove("currentImg");
-    slider_img.querySelector('.img' + numb).classList.add("currentImg");
+/////////////активное изображение
+    sliderImg.querySelector('.currentImg').classList.remove("currentImg");
+    sliderImg.querySelector('.img' + numb).classList.add("currentImg");
+///////////// активная точка
     dotsSelect.querySelector('.active').classList.remove('active');
     dotsSelect.querySelector('.point' + numb).classList.add('active');
+////////////// активная ссылка   
     document.querySelector('.link.active').classList.remove('active');
-    //linkSelect.querySelector('.active').classList.remove('active');
     linkSelect[`${numb}`].className = 'select-items_link link active';
   };
+
+  ////////////////////точки 
 
   function initPoint() {
     imageArray.forEach((image, index) => {
@@ -82,6 +106,8 @@ function initImageSlider() {
 
   initPoint();
 
+  //////////////////ссылки
+
   function initLink() {
     imageArray.forEach((image, index) => {
       linkSelect[index].className = `select-items_link link ${index === 0 ? "active" : ""}`
@@ -90,10 +116,7 @@ function initImageSlider() {
         moveCurrentImg(linkIndex);
       };
     });
-    //console.log(linkSelect);
-    console.log(document.getElementsByClassName('link active'));
-    //document.getElementsByClassName('link active').classList.remove('active');
-    //document.querySelector('.link.active').classList.remove('active');
+    // console.log(document.getElementsByClassName('link active'));
   };
 
   initLink();
