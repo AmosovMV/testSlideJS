@@ -142,11 +142,11 @@ body * {
     margin-right: -8px;
   }
 
-  .line-select {
+  /*.line-select {
     width: 40px;
     height: 1px;
     background-color: #FFFFFF;
-  }
+  } */
 
   .line-select-left {
     width: 40px;
