@@ -207,7 +207,7 @@ body * {
     position: absolute;
     width: 8px;
     height: 8px;
-    top: 1.4ex;
+    top: 1.25ex;
     left: 1.1ex;
     border: 3px solid white;
     border-right: none;
@@ -238,7 +238,7 @@ body * {
     width: 8px;
     height: 8px;
     top: 1.3ex;
-    left: 1.6ex;
+    left: 1.45ex;
     border: 3px solid white;
     border-right: none;
     border-bottom: none;
